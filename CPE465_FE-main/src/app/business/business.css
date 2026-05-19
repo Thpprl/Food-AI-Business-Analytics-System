@@ -1,0 +1,195 @@
+.canvas-container {
+  padding: 30px;
+  background: f8fafc;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Header */
+.canvas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.canvas-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ea580c;
+}
+
+.score {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: bold;
+  box-shadow: 0 10px 20px rgba(249,115,22,0.3);
+}
+
+/* Grid */
+.canvas-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Card */
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  border: 1px solid #f1f5f9;
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+}
+
+/* Title */
+.card h3 {
+  font-size: 18px;
+  font-weight: 900;
+  color: #f97316;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* List */
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card li {
+  font-size: 16px;
+  color: #334155;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 12px;
+}
+
+.card li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #fb923c;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 7px;
+}
+
+/* Span */
+.span-2 {
+  grid-row: span 2;
+}
+
+.span-3 {
+  grid-column: span 3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .canvas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* ส่วนหัวของการ์ด (Icon + Title) */
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* ระยะห่างระหว่างไอคอนกับตัวหนังสือ */
+  margin-bottom: 15px;
+}
+/* กรอบไอคอน (เหมือนรูปที่ส่งมา) */
+.icon-box {
+  width: 42px;
+  height: 42px;
+  background-color: #fff7ed; /* สีส้มอ่อนมากแบบในรูป */
+  color: #ea580c;           /* สีไอคอนส้มเข้ม */
+  border-radius: 12px;      /* ความมนของขอบ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.actions {
+  display: flex;           /* ใช้ Flexbox */
+  justify-content: center;  /* จัดแนวนอนให้อยู่ตรงกลาง */
+  align-items: center;      /* จัดแนวตั้งให้อยู่ตรงกลาง (กรณีมีพื้นที่ความสูง) */
+  width: 100%;             /* ให้ความกว้างเต็มจอ */
+  margin-top: 50px;        /* เว้นระยะห่างจากตารางด้านบน */
+  margin-bottom: 50px;     /* เว้นระยะจากขอบล่างจอ */
+}
+
+/* ตัวปุ่ม (ก๊อปจากอันเดิมของนายมาเช็กความกว้าง) */
+.btn-primary {
+  /* ... CSS เดิมของนาย ... */
+  display: inline-flex;    /* ให้ปุ่มขยายตามเนื้อหาข้างใน */
+  align-items: center;
+  gap: 12px;
+  padding: 14px 36px;
+  /* อย่าเผลอใส่ margin-left หรือ margin-right เองในนี้ */
+}
+.btn-cta {
+  /* พื้นหลังสีส้มหลัก */
+  background: #ea580c;
+  color: white;
+  
+  /* การจัดวาง */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  
+  /* ขนาดและทรงปุ่ม (ทรงแคปซูล) */
+  padding: 16px 40px;
+  border-radius: 18px; /* ปรับให้โค้งมนพอดีๆ ตามรูป */
+  border: none;
+  
+  /* ตัวหนังสือ */
+  font-family: 'Inter', 'Kanit', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  
+  /* เงา Soft Shadow สีส้ม */
+  box-shadow: 0 15px 30px rgba(234, 88, 12, 0.35);
+  
+  /* แอนิเมชัน */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-cta:hover {
+  background: #c2410c;
+  transform: translateY(-3px); /* ลอยขึ้นเล็กน้อยเวลาชี้ */
+  box-shadow: 0 20px 40px rgba(234, 88, 12, 0.45);
+}
+
+.btn-cta:active {
+  transform: translateY(0);
+}
+
+/* กรอบเส้นรอบไอคอนเอกสาร */
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+ 
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+

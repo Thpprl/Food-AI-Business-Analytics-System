@@ -1,0 +1,132 @@
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <div>
+        <h1>Business Analysis Report</h1>
+        <p>"วิเคราะห์กลยุทธ์และจุดบกพร่องเพื่อการเติบโต"</p>
+      </div>
+
+      <div class="score-box">
+        <span>Score</span>
+        <h2>{{ data.score }}%</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+<!-- GDP & Financial Insight -->
+<div class="card finance-card">
+  <h2 class="finance-title">
+    <svg viewBox="0 0 24 24" class="icon">
+      <path d="M3 3v18h18" stroke-width="2" stroke="currentColor" fill="none"/>
+      <path d="M7 14l4-4 3 3 4-6" stroke-width="2" stroke="currentColor" fill="none"/>
+    </svg>
+    การวิเคราะห์ผลกำไรและมูลค่ารวม
+  </h2>
+
+  <div class="finance-grid">
+
+    <div class="finance-item orange">
+      <span>Gross Profit (GP)</span>
+      <div class="value">{{ data.gdpMetrics.gpAfterCommission }}</div>
+      <p>After 35% Platform Fee</p>
+    </div>
+
+    <div class="finance-item">
+      <span>Market Value</span>
+      <div class="value">{{ data.gdpMetrics.marketValue }}</div>
+      <p>Total Addressable Market</p>
+    </div>
+
+    <div class="finance-item">
+      <span>Growth Rate</span>
+      <div class="value green">{{ data.gdpMetrics.growthRate }}</div>
+      <p>Projected Annual Growth</p>
+    </div>
+
+    <div class="finance-item dark">
+      <span>GMV Projected</span>
+      <div class="value white">{{ data.gdpMetrics.projectedGmv }}</div>
+      <p class="highlight">Est. Yearly Revenue</p>
+    </div>
+
+  </div>
+</div>
+    <!-- Channel Mix -->
+    <div class="card">
+      <h2>สัดส่วนช่องทางการขาย</h2>
+
+      <div class="bar">
+        <div class="online" [style.width.%]="data.channels.online">
+          ONLINE {{ data.channels.online }}%
+        </div>
+        <div class="onsite" [style.width.%]="data.channels.onsite">
+          ONSITE {{ data.channels.onsite }}%
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Weakness -->
+    <div class="card">
+  <h2>ทำไมถึงได้ {{ data.score }}%?</h2>
+
+  <div *ngFor="let item of data.reasonForScore; let i = index" class="reason-item">
+    
+    <div class="circle"
+         [ngClass]="{
+           'high': item.severity === 'High',
+           'medium': item.severity !== 'High'
+         }">
+      {{ i + 1 }}
+    </div>
+
+    <div class="content">
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.detail }}</p>
+    </div>
+
+  </div>
+</div>
+
+    <!-- Strategy -->
+    <div class="section">
+      <h2>กลยุทธ์แนะนำ</h2>
+
+      <div class="grid">
+        <div *ngFor="let s of data.strategies" class="strategy">
+          <div class="id">{{ s.id }}</div>
+          <h3>{{ s.title }}</h3>
+          <p>{{ s.detail }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Locations -->
+    <div class="section-location">
+  <h2>สถานที่แนะนำ (RECOMMENDED)</h2>
+
+  <div class="location-grid">
+    <div *ngFor="let loc of data.locations" class="location-card">
+      <div class="icon-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+
+      <h3>{{ loc.area }}</h3>
+      <span class="tag">{{ loc.style }}</span>
+      <p>{{ loc.why }}</p>
+    </div>
+  </div>
+</div>
+
+    <!-- Buttons -->
+    <div class="actions">
+      <button class="primary" routerLink="/">กลับหน้าหลัก</button>
+      <button class="secondary" routerLink="/business">ดู Business Canvas</button>
+    </div>
+
+  </div>
+</div>

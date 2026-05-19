@@ -1,0 +1,179 @@
+<div class="app-container">
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo">
+        <span class="logo-icon">🍲</span>
+        <span class="logo-text">FoodAI <span>Insights</span></span>
+      </div>
+      <div class="step-counter">Step {{step}} of 3</div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <header class="page-header">
+      <h1 *ngIf="step === 1">บอกไอเดียของคุณ</h1>
+      <h1 *ngIf="step === 2">กลุ่มเป้าหมายและทำเล</h1>
+      <h1 *ngIf="step === 3">งบประมาณและเป้าหมาย</h1>
+      <p>ช่วยให้ AI เข้าใจบริบทธุรกิจของคุณเพื่อการวิเคราะห์ที่แม่นยำ</p>
+    </header>
+
+    <div class="progress-bar">
+      <div class="dot" [class.active]="step >= 1" [class.completed]="step > 1">
+        <span *ngIf="step <= 1">1</span>
+        <span *ngIf="step > 1" class="check-icon">✓</span>
+      </div>
+      <div class="line" [class.active]="step > 1"></div>
+
+      <div class="dot" [class.active]="step >= 2" [class.completed]="step > 2">
+        <span *ngIf="step <= 2">2</span>
+        <span *ngIf="step > 2" class="check-icon">✓</span>
+      </div>
+      <div class="line" [class.active]="step > 2"></div>
+
+      <div class="dot" [class.active]="step >= 3">3</div>
+    </div>
+
+    <div class="form-card">
+      <form (ngSubmit)="onSubmit()">
+
+        <div *ngIf="step === 1" class="form-step">
+          <div class="form-group">
+            <label class="label-with-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                class="orange-icon">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              ไอเดียธุรกิจของคุณคืออะไร?
+            </label>
+            <textarea name="ideaDetail" [(ngModel)]="formData.IdeaDetail" rows="3"
+              placeholder="อธิบายไอเดียร้านของคุณ..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="label-with-icon">
+              ชื่อร้านอาหาร (ถ้ามี)
+            </label>
+            <input type="text" name="businessName" [(ngModel)]="formData.businessName" placeholder="เช่น ร้านอร่อยดี">
+          </div>
+        </div>
+
+        <div *ngIf="step === 2" class="form-step">
+          <div class="form-group">
+            <label class="label-with-icon">
+              รูปแบบการขายที่คุณต้องการ
+            </label>
+
+            <div class="sales-grid">
+              <button type="button" (click)="setSalesChannel('store')"
+                [class.active]="formData.salesChannel === 'store'" class="sales-card">
+                <div class="icon-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                  </svg>
+                </div>
+                <div>หน้าร้านเท่านั้น</div>
+              </button>
+
+              <button type="button" (click)="setSalesChannel('online')"
+                [class.active]="formData.salesChannel === 'online'" class="sales-card">
+                <div class="icon-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path
+                      d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                    </path>
+                  </svg>
+                </div>
+                <div>ออนไลน์เท่านั้น</div>
+              </button>
+
+              <button type="button" (click)="setSalesChannel('both')" [class.active]="formData.salesChannel === 'both'"
+                class="sales-card">
+                <div class="icon-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                  </svg>
+                </div>
+                <div>ทั้งหน้าร้านและออนไลน์</div>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid-row">
+            <div class="form-group">
+              <label class="label-with-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  class="orange-icon">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                ทำเลที่สนใจ
+              </label>
+              <input type="text" name="location" [(ngModel)]="formData.location" placeholder="เช่น สยามสแควร์">
+            </div>
+
+            <div class="form-group">
+              <label class="label-with-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                  class="orange-icon">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="8.5" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                กลุ่มเป้าหมาย
+              </label>
+              <input type="text" name="targetAudience" [(ngModel)]="formData.targetAudience"
+                placeholder="เช่น นักศึกษา, คนทำงาน">
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="step === 3" class="form-step">
+          <div class="form-group">
+            <label class="label-with-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                class="orange-icon">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <line x1="2" y1="10" x2="22" y2="10"></line>
+              </svg>
+              งบประมาณเริ่มต้นที่ต้องการลงทุน
+            </label>
+            <div class="input-wrapper">
+              <span class="currency-symbol">฿</span>
+              <input type="text" [value]="displayBudget" (input)="onBudgetInput($event)" placeholder="0">
+            </div>
+
+            <div class="quick-select">
+              <button type="button" class="chip" (click)="setBudget(100000)">100,000</button>
+              <button type="button" class="chip" (click)="setBudget(500000)">500,000</button>
+              <button type="button" class="chip" (click)="setBudget(1000000)">1,000,000</button>
+              <button type="button" class="chip" (click)="setBudget(5000000)">5,000,000</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" *ngIf="step > 1" (click)="prevStep()" class="btn-secondary">ย้อนกลับ</button>
+          <button type="button" *ngIf="step < 3" (click)="nextStep()" class="btn-primary">ถัดไป</button>
+          <button type="submit" *ngIf="step === 3" [disabled]="isAnalyzing" class="btn-submit">
+            {{ isAnalyzing ? 'กำลังวิเคราะห์...' : 'วิเคราะห์แผนธุรกิจ' }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </main>
+</div>
