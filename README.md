@@ -2,31 +2,6 @@
 
 An intelligent web application that analyzes food-industry business ideas, automatically generating a **Business Model Canvas (BMC)** and action strategies tailored for the Thai market.
 
----
-
-## 🏗️ System Architecture
-
-This project is built using a **Dual-Model LLM Failover Architecture** to optimize costs and guarantee 99.9% system availability. 
-
-```mermaid
-graph TD
-    User([User / Browser]) <--> FE[Angular Frontend]
-    FE <-->|REST API| BE[NestJS Backend]
-    
-    subgraph AI Service Layer
-        BE -->|1. Primary - 45s Timeout| Ngrok[Ngrok Tunnel]
-        Ngrok -->|HTTPS| Ollama[Ollama Local Server]
-        Ollama --> Qwen[Qwen 2.5:7b LLM]
-        
-        BE -->|2. Fallback - On Failure| Gemini[Google Gemini API]
-        Gemini --> GemModel[gemini-1.5-flash]
-    end
-    
-    BE <--> DB[(Database via Prisma)]
-```
-
----
-
 ## 👥 Team Responsibilities & Contributions
 
 The project was built collaboratively, dividing responsibilities into **Frontend/Core Backend** and **AI/System Integration**:
