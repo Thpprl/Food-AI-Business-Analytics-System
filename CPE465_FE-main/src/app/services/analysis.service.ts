@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, throwError } from 'rxjs';
 
 type businessData = {
   businessName: string;
@@ -22,6 +22,7 @@ export class AnalysisService {
   constructor(private http: HttpClient) {}
 
   analyzeBusinessPlan(formData: any): Observable<any> {
+    return throwError(() => new Error('เวอร์ชันสาธิตหน้าเว็บ: ยังไม่ได้เชื่อมต่อ AI backend'));
     const rawPayload = {
       IdeaDetail: formData.IdeaDetail,
       businessName: formData.businessName,
