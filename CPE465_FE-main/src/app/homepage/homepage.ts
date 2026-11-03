@@ -47,7 +47,7 @@ export class Homepage {
       },
       error: (err) => {
         this.isAnalyzing = false;
-        alert("เกิดข้อผิดพลาดในการวิเคราะห์ข้อมูล");
+        alert("เวอร์ชันสาธิตหน้าเว็บ: ยังไม่ได้เชื่อมต่อ Local LLM จึงไม่มีผลวิเคราะห์ AI");
       }
     });
   }
